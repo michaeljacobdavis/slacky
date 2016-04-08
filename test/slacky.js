@@ -13,6 +13,9 @@ const before = lab.before;
 const beforeEach = lab.beforeEach;
 const afterEach = lab.afterEach;
 const expect = Code.expect;
+const RTM_EVENTS = {
+  MESSAGE: 'MESSAGE'
+};
 
 describe('Bot', () => {
   let bot;
@@ -22,7 +25,10 @@ describe('Bot', () => {
       warnOnReplace: false,
       warnOnUnregistered: false
     });
-    mockery.registerMock('@slack/client', { RtmClient: EventEmitter });
+    mockery.registerMock('@slack/client', {
+      RtmClient: EventEmitter,
+      RTM_EVENTS
+    });
     bot = new (require(modulePath))('123');
 
     done();
@@ -39,6 +45,29 @@ describe('Bot', () => {
     done();
   });
 
+
+  describe('listener', () => {
+    it('adds a listener for messsages and routes to a listener', done => {
+      bot.listen('test message', () => {
+        done();
+      });
+      bot.emit(RTM_EVENTS.MESSAGE, { text: 'test message' });
+    });
+
+    it('does not call a route callback if none match', done => {
+      bot.listen('not matching', () => {});
+      bot.emit(RTM_EVENTS.MESSAGE, { text: 'test message' });
+      setTimeout(done);
+    });
+
+    it('passes a response callback which sends a message when called', done => {
+      bot.sendMessage = () => done();
+      bot.listen('test message', (route, message, respond) => {
+        respond('blah');
+      });
+      bot.emit(RTM_EVENTS.MESSAGE, { text: 'test message' });
+    });
+  });
 
   describe('middleware', () => {
     it('returns the bot instance', done => {
@@ -65,38 +94,6 @@ describe('Bot', () => {
       });
       bot.on(event, () => {});
       bot.emit(event, data);
-    });
-
-    it('middleware is bound to the bot if possible', done => {
-      const event = 'test';
-      bot.use(function (next, event, data) {
-        expect(this).to.equal(bot);
-
-        done();
-      });
-      bot.on(event, () => {});
-      bot.emit(event);
-    });
-
-    it('middleware can continue by calling next', done => {
-      const event = 'test';
-      bot.use(function (next) {
-        next();
-      });
-      bot.on(event, () => { done(); });
-      bot.emit(event);
-    });
-
-    it('middleware can exit by not calling next', done => {
-      const event = 'test';
-      bot.use(function (next) {
-        // Not calling next stops the chain
-
-        // Wait for the chain to stop before finishing
-        setTimeout(done);
-      });
-      bot.on(event, () => { throw new Error('I should not be called')});
-      bot.emit(event);
     });
 
   });
