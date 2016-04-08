@@ -62,6 +62,14 @@ describe('router', () => {
       done();
     });
 
+    it('returns undefined if no route is matched', done => {
+      bot.listen(/blah/, () => {});
+
+      expect(bot.route('hello 123')).to.be.undefined();
+
+      done();
+    });
+
     it('returns the callback of the route', done => {
       const callback = function test() {};
       bot.listen(/hello (.*)/, callback);
