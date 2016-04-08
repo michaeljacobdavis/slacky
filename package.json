@@ -1,0 +1,35 @@
+{
+  "name": "slacky",
+  "version": "1.0.0",
+  "description": "A minimalistic slack bot framework.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@slack/client": "^2.3.0",
+    "wrap-fn": "^0.1.5"
+  },
+  "devDependencies": {
+    "code": "^2.2.0",
+    "eslint": "^2.7.0",
+    "lab": "^10.3.1",
+    "mockery": "^1.4.1"
+  },
+  "engines": {
+    "node": "^5.0.0"
+  },
+  "scripts": {
+    "test": "lab -vc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaeljacobdavis/slacky.git"
+  },
+  "author": "Mike Davis <michael.jacob.davis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaeljacobdavis/slacky/issues"
+  },
+  "homepage": "https://github.com/michaeljacobdavis/slacky#readme"
+}
