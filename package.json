@@ -8,11 +8,13 @@
   },
   "dependencies": {
     "@slack/client": "^2.3.0",
+    "items": "^2.0.0",
     "wrap-fn": "^0.1.5"
   },
   "devDependencies": {
     "code": "^2.2.0",
     "eslint": "^2.7.0",
+    "jsdoc-to-markdown": "^1.3.3",
     "lab": "^10.3.1",
     "mockery": "^1.4.1"
   },
@@ -20,7 +22,9 @@
     "node": "^5.0.0"
   },
   "scripts": {
-    "test": "lab -vc"
+    "prepublish": "npm test && npm run doc",
+    "test": "lab -vc",
+    "doc": "jsdoc2md -t docs.hbs './lib/*js' > README.md"
   },
   "repository": {
     "type": "git",
