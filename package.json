@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@slack/client": "^2.3.0",
+    "items": "^2.0.0",
     "wrap-fn": "^0.1.5"
   },
   "devDependencies": {
