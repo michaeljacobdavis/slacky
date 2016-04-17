@@ -70,6 +70,14 @@ describe('router', () => {
       done();
     });
 
+    it('returns undefined if not passed a string', done => {
+      bot.listen(/blah/, () => {});
+
+      expect(bot.route(null)).to.be.undefined();
+
+      done();
+    });
+
     it('returns the callback of the route', done => {
       const callback = function test() {};
       bot.listen(/hello (.*)/, callback);
