@@ -112,11 +112,8 @@ Register plugins to the bot.
 | pattern | <code>RegExp</code> &#124; <code>String</code> | Pattern to match incoming messages to. |
 | callback | <code>function</code> |  |
 
-**Example**  
+**Example** *(Listen takes either a string or regular expression and a callback. The callback is called whenever a message matching that string/regexp is seen. The callback is called with the route, message body, and a respond function to reply.)*  
 ```js
-<caption>Listen takes either a string or regular expression and a callback. The callback is called
-whenever a message matching that string/regexp is seen. The callback is called with the route,
-message body, and a respond function to reply.</caption>
 bot.listen('hello', function (route, message, respond) {
   respond('world');
 });
