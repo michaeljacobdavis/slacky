@@ -28,12 +28,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/michaeljacobdavis/slacky.git"
+    "url": "git+https://github.com/slacky-bot/slacky.git"
   },
+  "keywords": [
+    "slack",
+    "bot",
+    "slack-bot"
+  ],
   "author": "Mike Davis <michael.jacob.davis@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/michaeljacobdavis/slacky/issues"
+    "url": "https://github.com/slacky-bot/slacky/issues"
   },
-  "homepage": "https://github.com/michaeljacobdavis/slacky#readme"
+  "homepage": "https://github.com/slacky-bot/slacky#readme"
 }
